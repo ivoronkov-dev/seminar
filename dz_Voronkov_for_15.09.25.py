@@ -80,7 +80,6 @@ print(a.count('. ') + a.count('! ') + a.count('? ') + 1)
 print("task 10")
 s = input()
 spis = "аеёиоуыэюяАЕЁИОУЫЭЮЯ"
-#print("".join(ch + "с" + ch if ch in V else ch for ch in s), end="")
 k = "а"
 ans = ""
 for let in s:
@@ -91,4 +90,5 @@ for let in s:
         k = let
         ans = ans + let
 print(ans)
+
 
