@@ -74,7 +74,6 @@ print(max(a))
 print("task 9")
 with open('input.txt', 'r') as f1:
     a = str(f1.readlines())
-    print(a)
 print(a.count('. ') + a.count('! ') + a.count('? ') + 1)
 
 
@@ -92,3 +91,4 @@ for let in s:
         k = let
         ans = ans + let
 print(ans)
+
