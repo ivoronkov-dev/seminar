@@ -7,10 +7,8 @@ for i in range(1, a[0]):
 
 print("task 2")
 a = list(input().split())
-print(a)
 r = ""
 shag = int(len(a[1])/int(a[0]))
-print(shag)
 for i in range(int(a[0])):
     r = r + a[1][shag-1:0:-1]
     r = r + a[1][0]
@@ -90,5 +88,6 @@ for let in s:
         k = let
         ans = ans + let
 print(ans)
+
 
 
