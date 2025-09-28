@@ -3,14 +3,88 @@ import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
 import numpy as np
 from datetime import timedelta
+import math as math
 
 print("bonus (visible edge)")
 x = np.random.rand(30)
 y = np.random.rand(30)
-# edge - это окантовка вокруг графика
+
+# edge - это окантовка графика
 plt.scatter(x, y, s=400, c="orange", edgecolor="purple", linewidth=5)
 plt.title("bonus (visible edge)")
 plt.show()
+
+print("task 1")
+#for lab 1.1.4
+#помог сосед Петя
+
+
+
+font = {}
+titlefont = {}
+axfont = {}
+
+plt.rc('font', **font)
+#данные
+#=====================================
+geiger_data = [int(i) for i in open('exp.txt').readlines()]
+#число разбиений
+nt = 10
+np_data = np.array(geiger_data)
+reshaped_data = np.reshape(np_data, (len(geiger_data)//nt, nt))
+sum_data = np.sum(reshaped_data, 1)
+
+set_data = np.unique(sum_data,return_counts=True)
+
+#Просчёты
+n_ = sum_data.mean()
+set_data = np.unique(sum_data)
+puasson_y = []
+puasson_x = []
+for i in set_data:
+    n = float(i)
+    puasson_y.append((n_**(n))/(math.factorial(int(n)))*math.exp(0-n_))
+    puasson_x.append(i)
+
+sigma = 0
+for ni in sum_data:
+    sigma += ((ni - n_)**2)
+sigma = (sigma/len(sum_data))**0.5
+
+gaus_x = np.arange(min(sum_data),max(sum_data),0.1)
+gaus_y = []
+for x in gaus_x:
+    gaus_y.append(math.exp(0-((x-n_)**2/(2*sigma**2)))/(math.sqrt(2*math.pi)*sigma))
+sig = 0
+sig2 = 0
+sig3 = 0
+for i in sum_data:
+    if abs(i-n_)<=sigma:
+        sig+=1
+        sig2+=1
+        sig3+=1
+    elif abs(i-n_)<=sigma*2:
+        sig2+=1
+        sig3+=1
+    elif abs(i-n_)<=sigma*3:
+        sig3+=1
+
+fig = plt.figure(dpi=70)
+ax = fig.add_subplot(111, label="1")
+
+
+ax.plot(puasson_x, puasson_y, color="C3",linewidth=3,label='Распределение Пуассона') #красный
+ax.plot(gaus_x, gaus_y, color="C2",linewidth=3,label='Распределение Гаусса') #зелёный
+ax.hist(sum_data,bins=range(min(sum_data), int(max(sum_data)*1.1), 1),density=True,edgecolor = 'black',fc=(0.27, 0.62, 0.83, 0.3))
+
+plt.title(label=f"Гистограмма вероятностей для интервала {nt}с")
+ax.set_xticks(range(int(max(0.9*min(sum_data),0)) - 1,int(1.1*max(sum_data)),5))
+ax.set_ylabel("Доля случаев, ω", fontdict=axfont)
+ax.set_xlabel("Число случаев, n", fontdict=axfont)
+plt.legend(prop={'size': 20})
+
+plt.show()
+
 
 
 
