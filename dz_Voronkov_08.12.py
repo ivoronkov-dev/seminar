@@ -1,22 +1,24 @@
+import random
 import unittest
 
 print("task 1")
 
-
 a = int(input())
+
 
 def simple(x):
     b = []
     prov = 2
-    while prov**2 <= x:
+    while prov ** 2 <= x:
         if x % prov == 0:
             x = x / prov
             b.append(prov)
         else:
-            prov+=1
+            prov += 1
     if x != 1:
         b.append(int(x))
     return b
+
 
 def test1():
     case = unittest.TestCase()
@@ -27,6 +29,7 @@ def test1():
     except AssertionError as e:
         print(f"Тест 1 не прошел: {e}")
 
+
 def test2():
     case = unittest.TestCase()
     try:
@@ -35,6 +38,7 @@ def test2():
         print("Тест 2 прошел успешно!")
     except AssertionError as e:
         print(f"Тест 2 не прошел: {e}")
+
 
 def test3():
     case = unittest.TestCase()
@@ -45,6 +49,7 @@ def test3():
     except AssertionError as e:
         print(f"Тест 3 не прошел: {e}")
 
+
 test1()
 test2()
 test3()
@@ -54,6 +59,8 @@ print("task 2")
 
 x = [1, 2, 3, 4, 5]
 y = [1, 2, 3, 4, 5]
+
+
 def mnk(x, y):
     xy = []
     x2 = []
@@ -62,14 +69,13 @@ def mnk(x, y):
 
     for i in range(len(x)):
         xy.append(x[i] * y[i])
-        x2.append(x[i]**2)
+        x2.append(x[i] ** 2)
     sxy = sum(xy)
-    sx2 = sx**2
+    sx2 = sx ** 2
 
     a = round((len(x) * sxy - sx * sy) / (len(x) * sum(x2) - sx2), 3)
     b = round((sy - a * sx) / len(x), 3)
     return a, b
-
 
 
 def test4():
@@ -81,6 +87,7 @@ def test4():
     except AssertionError as e:
         print(f"Тест 1 не прошел: {e}")
 
+
 def test5():
     case = unittest.TestCase()
     try:
@@ -90,21 +97,24 @@ def test5():
     except AssertionError as e:
         print(f"Тест 2 не прошел: {e}")
 
+
 test4()
 test5()
 print("Вывод программы: ", mnk(x, y))
 
 print("task 3")
 
-def quick_sort(A):
-    if len(A) <= 1:
-        return A
+
+def quick_sort(x):
+    if len(x) <= 1:
+        return x
     else:
-        q = random.choice(A)
-        L = [elem for elem in A if elem < q]
-        M = [q] * A.count(q)
-        R = [elem for elem in A if elem > q]
-        return quick_sort(L) + M + quick_sort(R)
+        q = random.choice(x)
+        p = [elem for elem in x if elem < q]
+        m = [q] * x.count(q)
+        r = [elem for elem in x if elem > q]
+        return quick_sort(p) + m + quick_sort(r)
+
 
 try:
     assert quick_sort("123".split()) == ['123'], "должно быть [1, 2, 3]"
@@ -114,8 +124,8 @@ except AssertionError as e:
 
 print(quick_sort(input().split()))
 
-
 print("task 4")
+
 
 class Caesar:
     alphabet = "яюэьыъщшчцхфутсрпонмлкйизжёедгвба"
@@ -143,7 +153,12 @@ class Caesar:
 
 try:
     testik = Caesar(19)
-    assert testik.decode("Ыетэ, фн цбхтцтюыдо вбйчяё кыжг") == "Итак, вы догадались почему шифр", "он не работает("
+    assert (testik.decode("Ыетэ,"
+                          " фн цбхтц"
+                          "тюыдо вбйчяё "
+                          "кыжг") == "Итак, вы догад"
+                                     "ались почему шиф"
+                                     "р"), "он не работает("
 except AssertionError as e:
     print(f"В коде ошибка: {e}")
 
@@ -153,8 +168,3 @@ line = input()
 while line != '.':
     print(cipher.decode(line))
     line = input()
-
-
-
-
-
