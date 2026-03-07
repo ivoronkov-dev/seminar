@@ -1,4 +1,4 @@
-print("task 1 ")
+print("task 1")
 
 n = int(input())
 
